@@ -10,15 +10,30 @@ var microgear = Microgear.create({
     alias : ALIAS
 });
 
+function rgbToHex(r, g, b) {
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
 //function when recieve a message
 microgear.on('message', function(topic,msg) {
-    console.log("Recieved!" + " " +  msg);
+    console.log("Received!" + " " +  msg);
     // msg ส่งมาเป็น 255,255,255
-    $(".square").css("background-color", "rgb(" + msg + ")")
 
-    $(".rgb-main").html("rgb(" + msg + ")");
+    var msg_split = msg.split(',');
+
+    var hex = rgbToHex(parseInt(msg_split[0]),parseInt(msg_split[1]),parseInt(msg_split[2]));
+
+    updateTable($(".rgb-main").text(), $(".hex-main").text());
+
+    $(".square").css("background-color", "rgb(" + msg + ")")
+    $(".hex-main").html(hex);
+    $(".rgb-main").html("rgb(" + msg_split.join(", ") + ")");
     console.log("Changed");
 });
+
+function updateTable(rgb, hex){
+  $(".list-group > li:first").before('<li class="list-group-item"><span class="square-small rounded-circle"style="background-color: ' + rgb + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span> hex: <span class="hex-small">' + hex + '</span>, rgb: <span class="rgb-small">' + rgb + '</span></li>');
+}
 
 // function when connected to NETPIE
 microgear.on('connected', function() {
