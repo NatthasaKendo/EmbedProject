@@ -1,0 +1,3 @@
+tcs3200.c:22:6:Set_Filter	16	static
+tcs3200.c:44:6:Set_Scaling	16	static
+tcs3200.c:67:5:GetColor	24	static
