@@ -42,6 +42,17 @@ microgear.on('connected', function() {
 
 microgear.connect(APPID); // Connect to NETPIE
 
+document.getElementById("cp_btn").addEventListener("click", copyToClipboard);
+
+function copyToClipboard() {
+    var copyText = document.getElementById("hex-code");
+    var textArea = document.createElement("textarea");
+    textArea.value = copyText.textContent;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    textArea.remove();
+}
 
 
 
