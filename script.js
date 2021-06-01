@@ -12,15 +12,15 @@ var microgear = Microgear.create({
 
 //function when recieve a message
 microgear.on('message', function(topic,msg) {
-//ในที่นี้เราจะเอาข้อความไปแทนข้อความของ HTML element ชื่อ data
-document.getElementById("data").innerHTML = msg;
+    //ในที่นี้เราจะเอาข้อความไปแทนข้อความของ HTML element ชื่อ data
+    document.getElementById("data").innerHTML = msg;
 });
 
 // function when connected to NETPIE
 microgear.on('connected', function() {
     microgear.setAlias(ALIAS); // Set device's name
     /*
-    // แสดงข้อความให้ทราบว่าเชื่อมต่อสา เรจ็
+    // แสดงข้อความให้ทราบว่าเชื่อมต่อสำเร็จ
     document.getElementById("data").innerHTML = "Now I am connected with netpie...";
     // ตั้งค่า timer ให้ท างานทุก 1 วินาที (ตัวเลข 1000 มีหน่วยเป็น ms หมายถึง 1000 ms)
     setInterval(function() {
@@ -31,3 +31,38 @@ microgear.on('connected', function() {
 });
 
 microgear.connect(APPID); // Connect to NETPIE
+
+client = new Paho.MQTT.Client("mqtt.netpie.io", 443, "Client_ID");
+client.onMessageArrived = onMessageArrived;
+
+var options = {
+  useSSL: true,
+  userName : "Token",
+  password : "Secret",  
+  onSuccess: onConnect,
+  onFailure:doFail,
+}
+
+client.connect(options);
+
+function onConnect() {
+  client.subscribe("@msg/temp");
+}
+
+function doFail(e){
+    console.log(e);
+  }
+
+function onMessageArrived(message) {
+  document.getElementById("show").innerHTML = message.payloadString;
+}
+
+var colors = []; 
+var color = document.getElementsByClassName("h5 lead hex-main"); 
+colors.push(color); 
+
+function updateColor() {
+
+}
+
+
