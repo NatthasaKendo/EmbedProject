@@ -1,8 +1,18 @@
 .square {
+
   height: 400px;
   width: 400px;
   padding: 10px;
   background-color: #03d7fc;
    border: 1px solid #555;
    border-radius: 25px;
+}
+
+.square-small {
+  
+  display: inline;
+  height: 10px;
+  width: 10px;
+  border: 1px solid #555;
+  border-radius: 25px;
 }
