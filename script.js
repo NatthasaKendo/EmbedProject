@@ -10,16 +10,17 @@ var microgear = Microgear.create({
     alias : ALIAS
 });
 
-Boolean isInitiate = false;
+var isInitiate = false;
 
 //function when recieve a message
 microgear.on('message', function(topic,msg) {
+    console.log("Recieved!" + " " +  msg);
     isInitiate = true;
     //ในที่นี้เราจะเอาข้อความไปแทนข้อความของ HTML element ชื่อ data
     //document.getElementById("data").innerHTML = msg;
     // msg ส่งมาเป็น 255,255,255
     //ลองปรับเป็นด้านล่างแทน
-    var msg_split = s.split(',');
+    var msg_split = msg.split(',');
     document.getElementsByClassName("square").style.backgroundColor =
     "rgb(" + msg_split[0] + "," + msg_split[1] + "," + msg_split[2] + ")";
 
@@ -64,16 +65,16 @@ function doFail(e){
     console.log(e);
   }
 
-function onMessageArrived(message) {
-  document.getElementById("show").innerHTML = message.payloadString;
-}
+/*function onMessageArrived(msg) {
+    isInitiate = true;
+    var msg_split = msg.split(',');
+    document.getElementsByClassName("square").style.backgroundColor =
+    "rgb(" + msg_split[0] + "," + msg_split[1] + "," + msg_split[2] + ")";
 
-var colors = []; 
-var color = document.getElementsByClassName("h5 lead hex-main"); 
-colors.push(color); 
+    document.getElementsByClassName("rgb-main").innerHTML =
+    "rgb(" + msg_split[0] + "," + msg_split[1] + "," + msg_split[2] + ")";
+}*/
 
-function updateColor() {
 
-}
 
 
