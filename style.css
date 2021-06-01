@@ -4,7 +4,7 @@
   width: 400px;
   padding: 10px;
   background-color: #03d7fc;
-   border: 1px solid #555;
+   border: 0px solid #555;
    border-radius: 25px;
 }
 
@@ -13,6 +13,6 @@
   display: inline;
   height: 10px;
   width: 10px;
-  border: 1px solid #555;
+  border: 0px solid #e9e8eb;
   border-radius: 25px;
 }
