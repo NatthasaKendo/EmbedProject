@@ -10,10 +10,21 @@ var microgear = Microgear.create({
     alias : ALIAS
 });
 
+Boolean isInitiate = false;
+
 //function when recieve a message
 microgear.on('message', function(topic,msg) {
+    isInitiate = true;
     //ในที่นี้เราจะเอาข้อความไปแทนข้อความของ HTML element ชื่อ data
-    document.getElementById("data").innerHTML = msg;
+    //document.getElementById("data").innerHTML = msg;
+    // msg ส่งมาเป็น 255,255,255
+    //ลองปรับเป็นด้านล่างแทน
+    var msg_split = s.split(',');
+    document.getElementsByClassName("square").style.backgroundColor =
+    "rgb(" + msg_split[0] + "," + msg_split[1] + "," + msg_split[2] + ")";
+
+    document.getElementsByClassName("rgb-main").innerHTML =
+    "rgb(" + msg_split[0] + "," + msg_split[1] + "," + msg_split[2] + ")";
 });
 
 // function when connected to NETPIE
