@@ -4,6 +4,8 @@ const SECRET = "8EtOBBV6Z1Be0mjQrny2vwjAe";
 const ALIAS = "html"; //Device name (can be anything)
 const BOARD = "esp8266";
 
+var darkMode = false;
+
 var microgear = Microgear.create({
     key: KEY,
     secret: SECRET,
@@ -32,7 +34,8 @@ microgear.on('message', function(topic,msg) {
 });
 
 function updateTable(rgb, hex){
-  $(".list-group > li:first").before('<li class="list-group-item"><span class="square-small rounded-circle"style="background-color: ' + rgb + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span> hex: <span class="hex-small">' + hex + '</span>, rgb: <span class="rgb-small">' + rgb + '</span></li>');
+  $(".list-group > li:first").before('<li class="list-group-item"><span class="square-small rounded-circle"style="background-color: ' + rgb + '">&nbsp&nbsp&nbsp&nbsp&nbsp</span> <span class="hex-small">' + hex + '</span>, <span class="rgb-small">' + rgb + '</span></li>');
+  uppdateDarkMode();
 }
 
 // function when connected to NETPIE
@@ -42,10 +45,8 @@ microgear.on('connected', function() {
 
 microgear.connect(APPID); // Connect to NETPIE
 
-document.getElementById("cp_btn").addEventListener("click", copyToClipboard);
-
-function copyToClipboard() {
-    var copyText = document.getElementById("hex-code");
+function copyToClipboard(id) {
+    var copyText = document.getElementById(id);
     var textArea = document.createElement("textarea");
     textArea.value = copyText.textContent;
     document.body.appendChild(textArea);
@@ -54,5 +55,28 @@ function copyToClipboard() {
     textArea.remove();
 }
 
+function toggleDarkmode(){
+  if(darkMode){
+    darkMode = false;
+  }else{
+    darkMode = true;
+  }
+  uppdateDarkMode();
+}
 
-
+function uppdateDarkMode(){
+  if(darkMode){
+    $("body").css("background-color","rgb(38,38,38)");
+    $("body").css("color","white");
+    $(".card").css("background-color","rgb(70,70,70)");
+    $(".list-group-item").css("background-color","rgb(38,38,38)");
+    $(".far").css("color","white");
+  }else{
+    $("body").css("background-color","white");
+    $("body").css("color","black");
+    $(".card").css("background-color","rgb(247,247,247)");
+    $(".list-group-item").css("background-color","white");
+    $(".far").css("color","black");
+    //$("body").css("background-color","rgb(38,38,38)");
+  }
+}

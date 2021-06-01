@@ -9,10 +9,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
     <script src="https://cdn.netpie.io/microgear.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://kit.fontawesome.com/2f9801441f.js" crossorigin="anonymous"></script>
     <title>Color Decoder</title>
   </head>
  
   <body>
+    <div id="dark-mode">
+      Dark Mode&nbsp&nbsp
+      <label class="switch">
+        <input type="checkbox" onclick="toggleDarkmode()">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
     <div class="d-flex justify-content-center p-3">
       <h4 class="display-4">Color Decoder</h1>
     </div>
@@ -31,8 +40,8 @@
 
       <!---refer to hex-main and rgb-main to change value of each one-->
       <p><span class="h3">hex:&nbsp &nbsp</span> 
-        <span id="hex-code" class="h5 lead hex-main">#432d0</span>
-        <button id="cp_btn">Copy</button>
+        <span id="hex-code" class="h5 lead hex-main">#3cb371</span>
+        <button style ="background:transparent; border:none;" id="cp_btn" onclick="copyToClipboard('hex-code')"><i class="far fa-copy"></i></button>
       </p>
       <p><span class="h3">rgb:&nbsp &nbsp</span> 
         <span id="rgb-text" class="h5 lead rgb-main">rgb(60, 179, 113)</span>
@@ -58,8 +67,8 @@
     <li class="list-group-item"><span class="square-small rounded-circle"
       style="background-color: rgb(255, 89, 167)">
     &nbsp&nbsp&nbsp&nbsp&nbsp</span>
-    hex: <span class="hex-small">#ff59a7</span>,
-    rgb: <span class="rgb-small">rgb(255, 89, 167)</span></li>
+    <span class="hex-small">#ff59a7</span>,
+    <span class="rgb-small">rgb(255, 89, 167)</span></li>
     
     <!--------------------------------------->
 
@@ -67,14 +76,14 @@
     <li class="list-group-item"><span class="square-small rounded-circle"
       style="background-color: rgb(124, 89, 167)">
     &nbsp&nbsp&nbsp&nbsp&nbsp</span>
-    hex: <span class="hex-small">#7c59a7</span>,
-    rgb: <span class="rgb-small">rgb(124, 89, 167)</span></li>
+    <span class="hex-small">#7c59a7</span>,
+    <span class="rgb-small">rgb(124, 89, 167)</span></li>
 
     <li class="list-group-item"><span class="square-small rounded-circle"
       style="background-color: rgb(255, 165, 0)">
     &nbsp&nbsp&nbsp&nbsp&nbsp</span>
-    hex: <span class="hex-small">#ffa500</span>,
-    rgb: <span class="rgb-small">rgb(255, 165, 0)</span></li>
+    <span class="hex-small">#ffa500</span>,
+    <span class="rgb-small">rgb(255, 165, 0)</span></li>
   </ul>
 
 
